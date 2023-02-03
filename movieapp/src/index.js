@@ -54,6 +54,16 @@ function Booklist() {
 const Book = (props) => {
   const { img, title, auth } = props.book
   console.log(props)
+
+  const clickHandler = () => {
+    alert('hello world')
+  }
+
+  const deletehandler = (idn) => {
+    console.log(idn)
+    console.log(idn.target)
+    alert('delete complited')
+  }
   return (
     <section>
       <article className='book'>
@@ -63,6 +73,12 @@ const Book = (props) => {
         <img src={img} alt='' />
         <p>{title}</p>
         <p>{auth}</p>
+        <button type='button' onClick={clickHandler}>
+          click
+        </button>
+        <button type='button' onClick={deletehandler(title)}>
+          delete
+        </button>
         {/* {props.children} */}
       </article>
     </section>
