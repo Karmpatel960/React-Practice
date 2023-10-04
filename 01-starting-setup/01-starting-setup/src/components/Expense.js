@@ -1,13 +1,43 @@
-import ExpenseItem from './ExpenseItem';
-function Expense(props){
-    return(
+import React, { useState } from 'react'
+import ExpenseItem from './ExpenseItem'
+import ExpenseFilter from './ExpenseFilter/ExpenseFilter'
+function Expense(props) {
+  const [year, setyear] = useState('2020')
+  // const [filterInfotext, setfilterinfotext] = useState('2019,2021,2022')
+  // let infoText = '2019,2021,2022'
+  // if (year === '2020') {
+  //   infoText = '2019,2021,2022'
+  // } else if (year === '2019') {
+  //   infoText = '2020,2021,2022'
+  // } else if (year === '2022') {
+  //   infoText = '2019,2020,2021'
+  // } else {
+  //   infoText = '2019,2020,2022'
+  // }
+
+  function handleyear(selectedyear) {
+    setyear(selectedyear)
+    console.log(selectedyear)
+  }
+
+  const listl = props.item.filter((expense) => {
+    return expense.date.getFullYear().toString() === year
+  })
+
+  return (
     <>
-     <ExpenseItem title={props.expense[0].title} amount={props.expense[0].amount} date = {props.expense[0].date}></ExpenseItem>
-      <ExpenseItem title={props.expense[1].title} amount={props.expense[1].amount} date = {props.expense[1].date}></ExpenseItem>
-      <ExpenseItem title={props.expense[2].title} amount={props.expense[2].amount} date = {props.expense[2].date}></ExpenseItem>
-      <ExpenseItem title={props.expense[3].title} amount={props.expense[3].amount} date = {props.expense[3].date}></ExpenseItem>
+      <ExpenseFilter selected={year} onyear={handleyear} />
+      {/* <p>Data From year {infoText} is Hidden</p> */}
+      {listl.map((expense) => (
+        <ExpenseItem
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))}
     </>
-    )
+  )
 }
 
-export default Expense;
+export default Expense

@@ -1,8 +1,8 @@
-import keyConceptsImage from './assets/images/key-concepts.png';
-import componentsImage from './assets/images/components.png';
-import stateImage from './assets/images/state.png';
-import eventsImage from './assets/images/events.png';
-import Conceptbox from'./components/conceptbox.js';
+import componentsImage from './assets/images/components.png'
+import stateImage from './assets/images/state.png'
+import eventsImage from './assets/images/events.png'
+import Conceptbox from './components/conceptbox'
+import Header from './components/Header'
 
 const concepts = [
   {
@@ -23,34 +23,28 @@ const concepts = [
     description:
       'Event handlers are added via props to (built-in) components. You pass functions as values to such event handlers to control which functions gets executed for which event.',
   },
-];
+]
 
 function ReusableConceptBox({ title, image, desc }) {
-  return (
-    <Conceptbox title={title} image={image} desc={desc}></Conceptbox>
-  );
+  return <Conceptbox title={title} image={image} desc={desc}></Conceptbox>
 }
 
 function App() {
   return (
     <div>
-      <header>
-        <img src={keyConceptsImage} alt="Medal badge with a star" />
-        <h1>Key React Concepts</h1>
-        <p>Selected key React concepts you should know about</p>
-      </header>
-      <ul id="concepts">
-      {concepts.map((concept, index) => (
-        <ReusableConceptBox
-          key={index}
-          title={concept.title}
-          image={concept.image}
-          desc={concept.description}
-        />
-      ))}
+      <Header />
+      <ul id='concepts'>
+        {concepts.map((concept, index) => (
+          <ReusableConceptBox
+            key={index}
+            title={concept.title}
+            image={concept.image}
+            desc={concept.description}
+          />
+        ))}
       </ul>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
