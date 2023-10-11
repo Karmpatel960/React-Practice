@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import ExpenseItem from './ExpenseItem'
 import ExpenseFilter from './ExpenseFilter/ExpenseFilter'
+import ExpenseList from './ExpenseList'
 function Expense(props) {
   const [year, setyear] = useState('2020')
   // const [filterInfotext, setfilterinfotext] = useState('2019,2021,2022')
@@ -24,18 +24,34 @@ function Expense(props) {
     return expense.date.getFullYear().toString() === year
   })
 
+  // let expensecontent = <p>Not Data Found</p>
+
+  // if(listl.length > 0){
+  //   expensecontent = listl.map((expense) => (
+  //     <ExpenseItem
+  //       key={expense.id}
+  //       title={expense.title}
+  //       amount={expense.amount}
+  //       date={expense.date}
+  //     />
+  //   ))
+  // }
+
   return (
     <>
       <ExpenseFilter selected={year} onyear={handleyear} />
       {/* <p>Data From year {infoText} is Hidden</p> */}
-      {listl.map((expense) => (
+      {/* {listl.length === 0 && <p>No Expense Found. </p>}
+      {
+        listl.length  > 0 && listl.map((expense) => (
         <ExpenseItem
           key={expense.id}
           title={expense.title}
           amount={expense.amount}
           date={expense.date}
         />
-      ))}
+      ))} */}
+      <ExpenseList item={listl}/>
     </>
   )
 }
