@@ -24,3 +24,11 @@
 .new-expense__actions {
   text-align: right;
 }
+
+.new-expense__actions_main {
+  text-align: center;
+}
+
+.new-expense__actions_cancel {
+  text-align: left;
+}

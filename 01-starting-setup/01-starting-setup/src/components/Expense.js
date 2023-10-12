@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import ExpenseFilter from './ExpenseFilter/ExpenseFilter'
 import ExpenseList from './ExpenseList'
+import ExpenseChart from './ExpenseChart'
 function Expense(props) {
   const [year, setyear] = useState('2020')
   // const [filterInfotext, setfilterinfotext] = useState('2019,2021,2022')
@@ -51,6 +52,7 @@ function Expense(props) {
           date={expense.date}
         />
       ))} */}
+      <ExpenseChart expenses={listl}/>
       <ExpenseList item={listl}/>
     </>
   )
