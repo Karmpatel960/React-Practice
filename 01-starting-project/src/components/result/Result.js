@@ -20,8 +20,8 @@ function Result(props) {
             <td>{yearData.year}</td>
             <td>{yearData.savingsEndOfYear.toFixed(2)}</td>
             <td>{yearData.yearlyInterest.toFixed(2)}</td>
-            <td>{yearData.totalinterest.toFixed(2)}</td>
-            <td>{yearData.investedcapital}</td>
+            <td>{(yearData.savingsEndOfYear - props.initial - yearData.yearlyContribution * yearData.year).toFixed(2)}</td>
+            <td>{(props.initial+ yearData.yearlyContribution* yearData.year).toFixed(2)}</td>
           </tr>
         ))}
       </tbody>
