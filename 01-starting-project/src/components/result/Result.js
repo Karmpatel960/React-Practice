@@ -1,6 +1,13 @@
 import React from 'react';
 import './Result.css';
 
+const formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 function Result(props) {
 
   return (
@@ -18,10 +25,10 @@ function Result(props) {
         {props.yearlyData.map((yearData, index) => (
           <tr key={index}>
             <td>{yearData.year}</td>
-            <td>{yearData.savingsEndOfYear.toFixed(2)}</td>
-            <td>{yearData.yearlyInterest.toFixed(2)}</td>
-            <td>{(yearData.savingsEndOfYear - props.initial - yearData.yearlyContribution * yearData.year).toFixed(2)}</td>
-            <td>{(props.initial+ yearData.yearlyContribution* yearData.year).toFixed(2)}</td>
+            <td>{formatter.format(yearData.savingsEndOfYear)}</td>
+            <td>{formatter.format(yearData.yearlyInterest)}</td>
+            <td>{formatter.format(yearData.savingsEndOfYear - props.initial - yearData.yearlyContribution * yearData.year)}</td>
+            <td>{formatter.format(props.initial+ yearData.yearlyContribution* yearData.year)}</td>
           </tr>
         ))}
       </tbody>

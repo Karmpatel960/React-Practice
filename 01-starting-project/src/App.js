@@ -34,14 +34,14 @@ function App() {
 }
 
   const handleReset = () => {
-    setyearData([]);
+    setyearData(null);
   };
 
   return (
     <div>
       <FormHeader/>
       <Form calculateHandler={calculateHandler}  handleReset={handleReset} />
-      {!userInput && <p>No Intevestment Calculated yet!!</p>}
+      {!userInput && <p style={{textAlign : 'center'}}>No Investment Calculated yet!!</p>}
       {userInput && <Result yearlyData={yearlyData} initial = {userInput.currentSavings}/>}
     </div>
   );

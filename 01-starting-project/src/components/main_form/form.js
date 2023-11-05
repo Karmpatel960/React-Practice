@@ -63,7 +63,7 @@ function Form(props) {
 
   const handleInput = (input,value) => {
     setInput((prevInput) =>{ return {
-      ...prevInput,[input]:value
+      ...prevInput,[input]:+value
   };});
   }
 
