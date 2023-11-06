@@ -14,3 +14,10 @@
   margin: 0.5rem 0;
   padding: 0.5rem;
 }
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh; /* Optional: This centers the card vertically in the viewport */
+}

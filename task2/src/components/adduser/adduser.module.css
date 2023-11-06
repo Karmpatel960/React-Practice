@@ -43,3 +43,10 @@
 .button:focus {
   outline: none;
 }
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Optional: This centers the card vertically in the viewport */
+}

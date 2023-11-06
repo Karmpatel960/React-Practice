@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styles from './adduser.module.css'
+import Card from './Card'
 
 function Adduser({ handleData }) {
   const [userData, setUserData] = useState({ name: '', age: '' })
@@ -9,36 +10,42 @@ function Adduser({ handleData }) {
     setUserData({ ...userData, [name]: value })
   }
 
-  const handleSubmit = () => {
-    // Pass the userData object to the handleData function
+  const handleSubmit = (event) => {
+    event.preventDefault()
     handleData(userData)
   }
 
   return (
-    <div className={styles.input}>
-      <div className={styles.label}>
-        <label htmlFor='name'>Enter Name</label>
-        <input
-          className={styles['input input']}
-          type='text'
-          name='name'
-          value={userData.name}
-          onChange={handleInputChange}
-        />
-      </div>
-      <div className={styles.label}>
-        <label htmlFor='age'>Enter Age</label>
-        <input
-          className={styles['input input']}
-          type='text'
-          name='age'
-          value={userData.age}
-          onChange={handleInputChange}
-        />
-      </div>
-      <button type='submit' className={styles.button} onClick={handleSubmit}>
-        Add User
-      </button>
+    <div className={styles.centered}>
+      <Card>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.input}>
+            <div className={styles.label}>
+              <label htmlFor='name'>Enter Name</label>
+              <input
+                className={styles['input input']}
+                type='text'
+                name='name'
+                value={userData.name}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className={styles.label}>
+              <label htmlFor='age'>Enter Age(Years)</label>
+              <input
+                className={styles['input input']}
+                type='text'
+                name='age'
+                value={userData.age}
+                onChange={handleInputChange}
+              />
+            </div>
+            <button type='submit' className={styles.button}>
+              Add User
+            </button>
+          </div>
+        </form>
+      </Card>
     </div>
   )
 }
