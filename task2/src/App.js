@@ -8,13 +8,10 @@ function App() {
   const [error, setError] = React.useState(false)
 
   const handleData = (newData) => {
-    // Check if the name and age are entered
     if (newData.name.trim().length === 0 || newData.age.trim().length === 0) {
       setError('Please enter both name and age')
       return
     }
-
-    // Check if age is within the range [0, 30]
     const ageValue = parseFloat(newData.age)
     // if (isNaN(ageValue) || ageValue < 0 || ageValue > 30) {
     //   setError('Age must be a number between 0 and 30 Or Age must be a number')

@@ -8,15 +8,11 @@ function List(props) {
       <Card>
         <div className={styles.users}>
           <ul className={styles.ul}>
-            {props.items.map(
-              (
-                item // Changed 'props.item' to 'props.items'
-              ) => (
-                <li className={styles.li} key={item.id}>
-                  {item.name} ({item.age} years old)
-                </li>
-              )
-            )}
+            {props.items.map((item) => (
+              <li className={styles.li} key={item.id}>
+                {item.name} ({item.age} years old)
+              </li>
+            ))}
           </ul>
         </div>
       </Card>
