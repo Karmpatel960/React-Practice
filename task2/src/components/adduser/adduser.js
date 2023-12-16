@@ -7,12 +7,13 @@ function Adduser({ handleData }) {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
-    setUserData({ ...userData, [name]: value })
+    setUserData({ ...userData, [name]: value, id: Math.random().toString() })
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
     handleData(userData)
+    setUserData({ name: '', age: '', id: Math.random().toString() })
   }
 
   return (

@@ -3,7 +3,7 @@ import styles from './Error.module.css'
 
 function ErrorModal(props) {
   return (
-    <div className={styles.backdrop}>
+    <div className={styles.backdrop} onClick={props.onClose}>
       <div className={styles.modal}>
         <div className={styles.header}>
           <h2>Error</h2>
