@@ -44,6 +44,7 @@ const InputBar = forwardRef(function InputBar({}, ref) {
       <dialog
         ref={dialog}
         className='backdrop:bg-stone-900/90 p-4 rounded-md shadow-md'
+        onClose={handleCancel}
       >
         <p className='flex flex-col gap-1 my-4'>Add Project</p>
         <menu className='flex items-center justify-end gap-4 my-4'>
