@@ -7,7 +7,7 @@ export default function TaskDetail({
   onDelete,
   onAddTask,
   onDeleteTask,
-  task,
+  tasks,
 }) {
   const formatDate = new Date(project.date).toLocaleDateString('en-US', {
     day: 'numeric',
@@ -40,7 +40,7 @@ export default function TaskDetail({
           <p className='mb-4 text-stone-400'>Date: {formatDate}</p>
         </header>
         <h1 className='text-3xl font-bold text-stone-600 mb-2'>TASK</h1>
-        <Task onAdd={onAddTask} onDelete={onDeleteTask} task={task} />
+        <Task onAdd={onAddTask} onDelete={onDeleteTask} task={tasks} />
       </div>
     </>
   )

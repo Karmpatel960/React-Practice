@@ -5,7 +5,9 @@ export default function Task({ task, onAdd, onDelete }) {
     <section>
       <Newtask onAdd={onAdd} />
       {task.length === 0 && (
-        <p className='text-stone-800 mb-4'>this is not contain any tasks</p>
+        <p className='flex item-center text-stone-800 mb-4'>
+          this is not contain any tasks
+        </p>
       )}
       {task.length > 0 &&
         task.map((task) => {

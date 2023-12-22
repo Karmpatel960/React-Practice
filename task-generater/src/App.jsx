@@ -9,80 +9,45 @@ function App() {
   const [project, setProject] = useState({
     selectedProjectId: undefined,
     projects: [],
-    task: [],
+    task: {},
   })
-
-  // function handletask(text) {
-  //   setProject((prevState) => {
-  //     const taskId = Math.random()
-  //     const newData = {
-  //       text: text,
-  //       projectId: prevState.selectedProjectId,
-  //       id: taskId,
-  //     }
-
-  //     return {
-  //       ...prevState,
-  //       task: [newData, ...prevState.task],
-  //     }
-  //   })
-  // }
 
   function handletask(text) {
     setProject((prevState) => {
       const taskId = Math.random()
-      const newData = {
+      const taskData = {
         text: text,
         projectId: prevState.selectedProjectId,
         id: taskId,
       }
 
-      const updatedProjects = prevState.projects.map((proj) => {
-        if (proj.id === prevState.selectedProjectId) {
-          return {
-            ...proj,
-            task: [newData, ...(proj.task || [])],
-          }
-        }
-        return proj
-      })
+      const updatedTasks = {
+        ...prevState.task,
+        [prevState.selectedProjectId]: [
+          taskData,
+          ...(prevState.task[prevState.selectedProjectId] || []),
+        ],
+      }
 
       return {
         ...prevState,
-        projects: updatedProjects,
+        task: updatedTasks,
       }
     })
   }
 
-  // function handlecanceltask(id) {
-  //   setProject((prevState) => {
-  //     const updatedTasks = prevState.task.filter((task) => task.id !== id)
-
-  //     return {
-  //       ...prevState,
-  //       task: updatedTasks,
-  //     }
-  //   })
-  // }
-
   function handlecanceltask(id) {
     setProject((prevState) => {
-      const updatedProjects = prevState.projects.map((proj) => {
-        if (proj.id === prevState.selectedProjectId) {
-          const updatedTasks = (proj.task || []).filter(
-            (task) => task.id !== id
-          )
-          return {
-            ...proj,
-            task: updatedTasks,
-          }
-        }
-        return proj
-      })
+      const updatedTasks = {
+        ...prevState.task,
+        [prevState.selectedProjectId]: (
+          prevState.task[prevState.selectedProjectId] || []
+        ).filter((task) => task.id !== id),
+      }
 
       return {
         ...prevState,
-        projects: updatedProjects,
+        task: updatedTasks,
       }
     })
   }
@@ -132,7 +97,7 @@ function App() {
       onDelete={handleDelete}
       onAddTask={handletask}
       onDeleteTask={handlecanceltask}
-      task={project.task}
+      tasks={project.task[project.selectedProjectId] || []}
     />
   )
 
@@ -169,22 +134,6 @@ function App() {
       }
     })
   }
-
-  // function onSaveProject(updatedTasks) {
-  //   setProject((prevState) => {
-  //     const updatedProjects = prevState.projects.map((proj) => {
-  //       if (proj.id === project.selectedProjectId) {
-  //         return { ...proj, tasks: updatedTasks }
-  //       }
-  //       return proj
-  //     })
-
-  //     return {
-  //       ...prevState,
-  //       projects: updatedProjects,
-  //     }
-  //   })
-  // }
 
   return (
     <main className='h-screen my-8 flex gap-8'>
