@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  nodeapp:
+    image: nodeapp
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    restart: always
+    networks:
+      - mynetwork
+
+  db:
+    container_name: db
+    image: postgres:12
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_USER: user123
+      POSTGRES_DB: defaultdb
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - mynetwork
+
+volumes:
+  db: {}
+
+networks:
+  mynetwork:
