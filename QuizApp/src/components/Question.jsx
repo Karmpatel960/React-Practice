@@ -3,20 +3,25 @@ import Answer from "./Answer"
 import { useState } from "react"
 import questions from "../questions"
 export default function Question({
-    key,
-    questionText,
-    // answer,
-    // onSelectAnswer,
-    answeredState,
-    handleskipanswer,
-    selectedAnswer
-     
+    index,
+    onSelectAnswer,
+    handleskipanswer
 }) {
 
     const [answer,setAnswer] = useState({
         selectedAnswer: ' ',
         isCorrect: null
     })
+
+    let  timer = 10000;
+
+    if(answer.selectedAnswer){
+        timer = 1000;
+    }
+    if(answer.isCorrect !== null){
+        timer = 2000;
+    }
+
 
     function handleSelectAnswer(selectedAnswer) {
         setAnswer({
@@ -27,11 +32,24 @@ export default function Question({
         setTimeout(() => {
             setAnswer({
                 selectedAnswer: ' ',
-                isCorrect: questions[key].answers[0] === answer[0]
+                isCorrect: questions[index].answers[0] === answer[0]
             })
+
+            setTimeout(() =>{
+                onSelectAnswer(selectedAnswer)
+
+            },2000)
         }, 1000)
 
 
+    }
+
+    let answeredState = ' ';
+
+    if(answer.selectedAnswer && answer.isCorrect != null){
+        answeredState = answer.isCorrect ? 'correct' : 'wrong'
+    } else if(answer.selectedAnswer){
+        answeredState = 'answered'
     }
 
 
@@ -41,13 +59,14 @@ export default function Question({
         <>
         <div id='question'>
         <ProgressBar
-          timeout={10000}
+          timeout={timer}
           onTimeout={handleskipanswer}
+          mode={answeredState}
         />
-        <h2>{questions[key].text}</h2>
+        <h2>{questions[index].text}</h2>
         <Answer 
-        answer={answer}
-         selectedAnswer={selectedAnswer}
+        answer={questions[index].answers}
+         selectedAnswer={answer.selectedAnswer}
          answeredState={answeredState}
          OnSelected={handleSelectAnswer}/>
       </div>

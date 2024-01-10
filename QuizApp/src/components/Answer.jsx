@@ -14,9 +14,9 @@ export default function Answer({answer,selectedAnswer,answeredState , OnSelected
             let cssclass = ''
             if (answeredState === 'answered' && isselected) {
               cssclass = 'selected'
-            }
+            } 
 
-            if (answeredState === 'correct' || answeredState === 'wrong' && isselected) {
+            if ((answeredState === 'correct' || answeredState === 'wrong' )&& isselected) {
               cssclass = answeredState
             }
             return (
@@ -24,6 +24,7 @@ export default function Answer({answer,selectedAnswer,answeredState , OnSelected
                 <button
                   onClick={() => OnSelected(answer)}
                   className={cssclass}
+                  
                 >
                   {answer}
                 </button>
