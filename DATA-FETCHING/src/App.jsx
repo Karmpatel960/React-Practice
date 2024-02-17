@@ -1,5 +1,6 @@
-import { useRef, useState, useCallback, useEffect } from 'react'
+import { useRef, useState, useCallback } from 'react'
 
+import { useFetch } from './hooks/useFetch.js'
 import Places from './components/Places.jsx'
 import Modal from './components/Modal.jsx'
 import DeleteConfirmation from './components/DeleteConfirmation.jsx'
@@ -11,28 +12,16 @@ import Error from './components/Error.jsx'
 function App() {
   const selectedPlace = useRef()
 
-  const [userPlaces, setUserPlaces] = useState([])
-  const [fetching, setFetching] = useState(false)
-  const [error, setError] = useState()
+  const {
+    userPlaces: userPlaces,
+    fetching,
+    setUserPlaces: setUserPlaces,
+    error,
+  } = useFetch(fetchUserPlaces, [])
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const [errorupdate, setErrorUpdate] = useState()
-
-  useEffect(() => {
-    async function fetchPlaces() {
-      setFetching(true)
-      try {
-        const places = await fetchUserPlaces()
-        setUserPlaces(places)
-      } catch (error) {
-        setError({ message: error.message || 'Somthing gets Wrong !!!' })
-      }
-
-      setFetching(false)
-    }
-    fetchPlaces()
-  }, [])
 
   function handleStartRemovePlace(place) {
     setModalIsOpen(true)
@@ -58,7 +47,7 @@ function App() {
       await updateUserPlace([selectedPlace, ...userPlaces])
     } catch (error) {
       setUserPlaces(userPlaces)
-      setErrorUpdate({ message: error.message || 'Somthing gets Wrong !!!' })
+      setErrorUpdate({ message: error.message || 'Something gets Wrong !!!' })
     }
   }
 
@@ -76,12 +65,12 @@ function App() {
         )
       } catch (error) {
         setUserPlaces(userPlaces)
-        setErrorUpdate({ message: error.message || 'Somthing gets Wrong !!!' })
+        setErrorUpdate({ message: error.message || 'Something gets Wrong !!!' })
       }
 
       setModalIsOpen(false)
     },
-    [userPlaces]
+    [userPlaces, setUserPlaces]
   )
 
   function handleError() {
