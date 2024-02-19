@@ -3,21 +3,29 @@ import { useRef } from 'react'
 export default function Signup() {
   function handleSubmit(event) {
     event.preventDefault()
+
+    const fd = new FormData(event.target)
+    const acquisition = fd.getAll('acquisition')
+    const data = Object.fromEntries(fd.entries())
+    data.acquisition = acquisition
+    console.log(data)
+
+    event.target.reset()
   }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2>Welcome on board!</h2>
       <p>We just need a little bit of data from you to get you started 🚀</p>
 
       <div className='control'>
         <label htmlFor='email'>Email</label>
-        <input id='email' type='email' name='email' ref={email} />
+        <input id='email' type='email' name='email' />
       </div>
 
       <div className='control-row'>
         <div className='control'>
           <label htmlFor='password'>Password</label>
-          <input id='password' type='password' name='password' ref={password} />
+          <input id='password' type='password' name='password' />
         </div>
 
         <div className='control'>

@@ -9,11 +9,21 @@ export default function Login() {
     password: '',
   })
 
+  const [didedit, setDidedit] = useState({
+    email: false,
+    password: false,
+  })
+
+  const emailIsValid = didedit.email && !enterDetails.email.includes('@')
+  const passwordIsValid = enterDetails.password.trim().length > 6
+
   function handleSubmit(event) {
     event.preventDefault()
 
     console.log(enterDetails)
     console.log('Form submitted')
+    // enterDetails.email = ' '
+    // enterDetails.password = ' '
   }
 
   function handleInput(identifier, value) {
@@ -21,6 +31,17 @@ export default function Login() {
       ...enterDetails,
       [identifier]: value,
     })
+    setDidedit((prevedit) => ({
+      ...prevedit,
+      [identifier]: false,
+    }))
+  }
+
+  function handleBlur(identifier) {
+    setDidedit((prevedit) => ({
+      ...prevedit,
+      [identifier]: true,
+    }))
   }
   // function handleEmailChange(event) {
   //   setEnteredEmail(event.target.value)
@@ -42,9 +63,13 @@ export default function Login() {
             name='email'
             // onChange={handleEmailChange}
             // value={enteredEmail}
+            onBlur={() => handleBlur('email')}
             onChange={(event) => handleInput('email', event.target.value)}
             value={enterDetails.email}
           />
+          <div className='control-error'>
+            {emailIsValid && <p>Email must include "@"</p>}
+          </div>
         </div>
 
         <div className='control no-margin'>
@@ -53,6 +78,7 @@ export default function Login() {
             id='password'
             type='password'
             name='password'
+            onBlur={() => handleBlur('password')}
             onChange={(event) => handleInput('password', event.target.value)}
             value={enterDetails.password}
           />
